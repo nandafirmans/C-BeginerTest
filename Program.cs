@@ -11,20 +11,22 @@ namespace ConsoleApplication
         {
             var program = new Program();
 
-            //program.LectureOne();
-            //program.LectureTwo();
-            //program.LectureThree();
-            //program.LectureFour(3);
-            //program.LectureFive();
-            //program.LectureSix();
-            //program.LectureSeven();
-            //program.LectureEight();
-            program.LectureNine();
+            //program._Class();
+            //program._ArrayBasic();
+            //program._String();
+            //program._Enumeration(3);
+            //program._ValueAndReferenceTypes();
+            //program._Iteration();
+            //program._RandomClass();
+            //program._Array();
+            //program._GenericList();
+            //program._DateTime();
+            program._TimeSpan();
 
             Console.ReadLine();
         }
 
-        public void LectureOne() //class
+        private void _Class() //class
         {
             var result = Calculator.Add(2, 4); //using static method ( Dont Need Declare an object )
 
@@ -39,7 +41,7 @@ namespace ConsoleApplication
             Console.WriteLine(result);
         }
 
-        public void LectureTwo() //array
+        private void _ArrayBasic() //array
         {
             var arrInt = new int[3];
             var arrBool = new bool[3];
@@ -57,7 +59,7 @@ namespace ConsoleApplication
             
         }
 
-        public void LectureThree() //string
+        private void _String() //string
         {
             string str = "some String";
             var indexStr = new char[4] { str[5], str[1], str[2], str[0] }; // JURUS BARU
@@ -71,7 +73,7 @@ namespace ConsoleApplication
             Console.WriteLine($" {path} /n {indexStr} ");
         }
 
-        public void LectureFour(int id) //enum
+        private void _Enumeration(int id) //enum
         {
             var methodName = Function.Shipment( Convert.ToString((ShippingEnum)id) ); // send integer from parameter  and get return as a string
 
@@ -84,7 +86,7 @@ namespace ConsoleApplication
             Console.WriteLine( Convert.ToString($"Shipping Name : {methodName} , Shipping ID : {methodId}") ); // JURUS BARU (STRING INTERPOLATION)
         }
 
-        public void LectureFive() // value and refrence types
+        private void _ValueAndReferenceTypes() // value and refrence types
         {
             int num = 1; // VALUE TYPE
             Person person = new Person() {Age = 30}; // REFRENCE TYPE
@@ -103,7 +105,7 @@ namespace ConsoleApplication
             Console.WriteLine($"Value Type : {num} , Refrence Type : {person.Age}");
         }
 
-        public void LectureSix() // iteration
+        private void _Iteration() // iteration
         {
             while (true) // Continue Looping if the condition is true
             {
@@ -121,7 +123,7 @@ namespace ConsoleApplication
             }
         }
 
-        public void LectureSeven() // Random Class
+        private void _RandomClass() // Random Class
         {
             const int length = 10;
             var rand = new Random(); // create random class
@@ -139,7 +141,7 @@ namespace ConsoleApplication
             //Console.WriteLine((int)'a'); //Cast char to int and the result is '97 ( in ascii is "a" more info at http://ascii-code.com)' 
         }
 
-        public void LectureEight() // Array
+        private void _Array() // Array
         {
             var number = new int[] {5, 9, 12, 3, 1, 7};
 
@@ -148,12 +150,12 @@ namespace ConsoleApplication
             Console.WriteLine(number.Length); // Length method counting the length of an array 
 
             //IndexOF   
-            var index = Array.IndexOf(number, 1); //search index of the value in array
+            var index = System.Array.IndexOf(number, 1); //search index of the value in array
             Console.WriteLine("Result of IndexOf() method");
             Console.WriteLine($"Index of 1 in array is : {index}");
 
             //Clear
-            Array.Clear(number, 0, 2); // clear value inside an array ' in case integer so the value should be 0 (if its a string or an object it should be null)' 
+            System.Array.Clear(number, 0, 2); // clear value inside an array ' in case integer so the value should be 0 (if its a string or an object it should be null)' 
             Console.WriteLine("Result of Clear() method");
 
             foreach (var num in number)
@@ -163,7 +165,7 @@ namespace ConsoleApplication
 
             //Copy 
             var pasteArray = new int[3];
-            Array.Copy(number, pasteArray, 3); // copying a value of a targeted array to new array
+            System.Array.Copy(number, pasteArray, 3); // copying a value of a targeted array to new array
             Console.WriteLine("Result of Copy() method");
 
             foreach (var item in pasteArray)
@@ -172,7 +174,7 @@ namespace ConsoleApplication
             }
 
             //Sort
-            Array.Sort(number);
+            System.Array.Sort(number);
             Console.WriteLine("Result of Sort() method");
 
             foreach (var item in number)
@@ -181,15 +183,15 @@ namespace ConsoleApplication
             }
         }
 
-        public void LectureNine()
+        private void _GenericList()  // List
         {
             var numbers = new List<int>() {1, 2, 3, 4};
 
             //Add()
-            numbers.Add(1);
+            numbers.Add(1); // add value on the list
 
-            //AddRange()
-            numbers.AddRange(new []{ 7, 8, 9});
+            //AddRange() 
+            numbers.AddRange(new []{ 7, 8, 9}); // adding array or list on the current list 
 
             foreach (var number in numbers)
             {
@@ -224,6 +226,33 @@ namespace ConsoleApplication
             numbers.Clear(); //clear all value on the list
 
             Console.WriteLine($"after Clear() method, numbers.Count = {numbers.Count}");
+        }
+
+        private void _DateTime()
+        {
+            var dateTime = new DateTime();
+            var now = DateTime.Now;
+
+            Console.WriteLine($"Hour : {now.Hour}");
+            Console.WriteLine($"Minute : {now.Minute}");
+
+            var tommorow = now.AddDays(1);
+            var yesterday = now.AddDays(-1);
+
+            Console.WriteLine($"Tommorow : { tommorow.ToLongDateString() } || Yesterday : { yesterday.ToLongDateString() }");
+
+            Console.WriteLine();
+
+            Console.WriteLine(now.ToLongDateString());
+            Console.WriteLine(now.ToShortDateString());
+            Console.WriteLine(now.ToLongTimeString());
+            Console.WriteLine(now.ToLongTimeString());
+            Console.WriteLine(now.ToString("dd-MM-yyyy HH:mm"));
+        }
+
+        private void _TimeSpan()
+        {
+            var timeSpan = new TimeSpan(1, 2, 3); //1 : Hours, 2 : Minutes, 3 : Second
         }
     }  
 }
