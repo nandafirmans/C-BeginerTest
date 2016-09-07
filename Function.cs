@@ -1,4 +1,6 @@
-﻿using ConsoleApplication.Enumerator;
+﻿using System;
+using System.Collections.Generic;
+using ConsoleApplication.Enumerator;
 
 namespace ConsoleApplication
 {
@@ -32,6 +34,36 @@ namespace ConsoleApplication
         public static void MakeOld(Person person)
         {
             person.Age += 10;
+        }
+
+        public static string SummarizingText(string text)
+        {
+            const int maxLength = 20;
+
+            if (text.Length < maxLength)
+            {
+                return text;
+            }
+          
+            var words = text.Split(' ');
+            var summaryWords = new List<string>();
+            var totalCharacter = 0;
+            var summary = "";
+
+            foreach (var word in words)
+            {
+                summaryWords.Add(word);
+
+                totalCharacter += word.Length + 1;
+                if (totalCharacter > 20)
+                {
+                    break;
+                }
+            }
+
+            summary = String.Join(" ", summaryWords) + "...";
+
+            return summary;
         }
     }
 }

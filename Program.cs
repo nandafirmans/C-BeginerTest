@@ -21,7 +21,8 @@ namespace ConsoleApplication
             //program._Array();
             //program._GenericList();
             //program._DateTime();
-            program._TimeSpan();
+            //program._TimeSpan();
+            program._StringAdvance();
 
             Console.ReadLine();
         }
@@ -105,7 +106,7 @@ namespace ConsoleApplication
             Console.WriteLine($"Value Type : {num} , Refrence Type : {person.Age}");
         }
 
-        private void _Iteration() // iteration
+        private void _Iteration()
         {
             while (true) // Continue Looping if the condition is true
             {
@@ -123,7 +124,7 @@ namespace ConsoleApplication
             }
         }
 
-        private void _RandomClass() // Random Class
+        private void _RandomClass()
         {
             const int length = 10;
             var rand = new Random(); // create random class
@@ -141,7 +142,7 @@ namespace ConsoleApplication
             //Console.WriteLine((int)'a'); //Cast char to int and the result is '97 ( in ascii is "a" more info at http://ascii-code.com)' 
         }
 
-        private void _Array() // Array
+        private void _Array()
         {
             var number = new int[] {5, 9, 12, 3, 1, 7};
 
@@ -183,7 +184,7 @@ namespace ConsoleApplication
             }
         }
 
-        private void _GenericList()  // List
+        private void _GenericList()
         {
             var numbers = new List<int>() {1, 2, 3, 4};
 
@@ -252,7 +253,64 @@ namespace ConsoleApplication
 
         private void _TimeSpan()
         {
+            //Creating
             var timeSpan = new TimeSpan(1, 2, 3); //1 : Hours, 2 : Minutes, 3 : Second
+
+            var timeSpan1 = new TimeSpan(1, 0, 0); // (create an object) create 1 Hours TimeSpan
+            var timeSpan2 = TimeSpan.FromHours(1); // create 1 Hours TimeSpan, But more readable using this way than 'timespan1' way
+
+            var start = DateTime.Now;
+            var finish = DateTime.Now.AddMinutes(4);
+            var duration = finish - start;
+            Console.WriteLine($"Duration : {duration}"); // represent a TimeSpan
+
+            // Properties
+            Console.WriteLine($"Minutes : { timeSpan.Minutes }");
+            Console.WriteLine($"Total Minutes : { timeSpan.TotalMinutes }");
+
+            //Add
+            Console.WriteLine($"Add Example : { timeSpan.Add(TimeSpan.FromMinutes(8)) }");
+            Console.WriteLine($"Subtract Example : { timeSpan.Subtract(TimeSpan.FromMinutes(2.03)) }");
+
+            //Parse
+            Console.WriteLine($"Parsing String to a TimeSpan : { TimeSpan.Parse("02:50") }"); // Converting String to become TimeSpan Object
+        }
+
+        private void _StringAdvance()
+        {
+            /* String, Array, List */
+
+            var fullName = "Nanda Firmansyah";
+            Console.WriteLine($"Trim : { fullName.Trim() }");
+            Console.WriteLine($"ToUpper : { fullName.Trim().ToUpper() }");
+
+            var index = fullName.IndexOf(' '); // get the current index of given value, return it as an integer
+            var firstName = fullName.Substring(0, index); // selected the length of an index from a string
+            var lastName = fullName.Substring(index + 1);
+            Console.WriteLine($"FirsName : { firstName }");
+            Console.WriteLine($"LastName : { lastName }");
+
+            var splitToArray = fullName.Split(' '); // Split string to and return it as an array of string, depend by index of given value 
+            Console.WriteLine($"FullName using split method : { splitToArray[0] } { splitToArray[1] }");
+
+            Console.WriteLine($"Replace() method : { fullName.Replace("Firmansyah", "firmans").Replace(" ", string.Empty) }"); // selected current string value and replace it by the given value on the second parameter
+
+            if (String.IsNullOrWhiteSpace("")) //Return Boolean
+            {
+                Console.WriteLine("invalid");
+            }
+
+            var numbers = "1234";
+            Convert.ToInt32(numbers); // convert string to int
+
+            float price = 19.56f; 
+            Console.WriteLine(price.ToString("C"));
+            Console.WriteLine(price.ToString("C0"));
+
+            Console.WriteLine();
+
+            var sentence = "This is going to be a really really really really really really really long text";
+            var sentenceSummarized = Function.SummarizingText(sentence);
         }
     }  
 }
