@@ -1,6 +1,6 @@
-﻿using System;
+﻿using ConsoleApplication.Enumerator;
+using System;
 using System.Collections.Generic;
-using ConsoleApplication.Enumerator;
 
 namespace ConsoleApplication
 {
@@ -45,17 +45,17 @@ namespace ConsoleApplication
                 return text;
             }
           
-            var words = text.Split(' ');
-            var summaryWords = new List<string>();
+            var words = text.Split(' '); // spliting by the given parameter, and return it as an array of string
+            var summaryWords = new List<string>(); // create new list for containing the result of array string
             var totalCharacter = 0;
             var summary = "";
 
-            foreach (var word in words)
+            foreach (var word in words) //loops inside the array of string 
             {
-                summaryWords.Add(word);
+                summaryWords.Add(word); // adding an array of string to List<> of string
 
-                totalCharacter += word.Length + 1;
-                if (totalCharacter > 20)
+                totalCharacter += word.Length + 1; //every words will count
+                if (totalCharacter > 20)           // if its reach 20 char it will stop and get out of the loop
                 {
                     break;
                 }
@@ -64,6 +64,18 @@ namespace ConsoleApplication
             summary = String.Join(" ", summaryWords) + "...";
 
             return summary;
+        }
+
+        public static string ReverseName(string name)
+        {
+            var array = new char[name.Length];
+
+            for (var i = name.Length; i > 0; i--)
+            {
+                array[name.Length - i] = name[i - 1];
+            }
+            
+            return new string(array);
         }
     }
 }

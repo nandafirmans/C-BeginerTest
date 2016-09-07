@@ -2,6 +2,8 @@
 using ConsoleApplication.Math;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace ConsoleApplication
 {
@@ -22,12 +24,16 @@ namespace ConsoleApplication
             //program._GenericList();
             //program._DateTime();
             //program._TimeSpan();
-            program._StringAdvance();
+            //program._StringAdvance();
+            //program._StringBuilder();
+            //program._ProceduralPrograming();
+            //program._FileAndFileInfo();
+            program._DirectoryAndDirectoryInfo();
 
             Console.ReadLine();
         }
 
-        private void _Class() //class
+        private void _Class()
         {
             var result = Calculator.Add(2, 4); //using static method ( Dont Need Declare an object )
 
@@ -42,7 +48,7 @@ namespace ConsoleApplication
             Console.WriteLine(result);
         }
 
-        private void _ArrayBasic() //array
+        private void _ArrayBasic()
         {
             var arrInt = new int[3];
             var arrBool = new bool[3];
@@ -60,7 +66,7 @@ namespace ConsoleApplication
             
         }
 
-        private void _String() //string
+        private void _String()
         {
             string str = "some String";
             var indexStr = new char[4] { str[5], str[1], str[2], str[0] }; // JURUS BARU
@@ -74,7 +80,7 @@ namespace ConsoleApplication
             Console.WriteLine($" {path} /n {indexStr} ");
         }
 
-        private void _Enumeration(int id) //enum
+        private void _Enumeration(int id)
         {
             var methodName = Function.Shipment( Convert.ToString((ShippingEnum)id) ); // send integer from parameter  and get return as a string
 
@@ -87,7 +93,7 @@ namespace ConsoleApplication
             Console.WriteLine( Convert.ToString($"Shipping Name : {methodName} , Shipping ID : {methodId}") ); // JURUS BARU (STRING INTERPOLATION)
         }
 
-        private void _ValueAndReferenceTypes() // value and refrence types
+        private void _ValueAndReferenceTypes()
         {
             int num = 1; // VALUE TYPE
             Person person = new Person() {Age = 30}; // REFRENCE TYPE
@@ -311,6 +317,83 @@ namespace ConsoleApplication
 
             var sentence = "This is going to be a really really really really really really really long text";
             var sentenceSummarized = Function.SummarizingText(sentence);
+        }
+
+        private void _StringBuilder()
+        {
+            var builder = new StringBuilder();
+
+            builder
+                .Append('-', 10) 
+                .AppendLine()
+                .Append("Header")
+                .AppendLine()
+                .Append('-', 10)
+                .Replace("-", "+")
+                .Insert(0, new string('-', 10));
+
+            Console.WriteLine(builder);
+        }
+
+        private void _ProceduralPrograming()
+        {
+            Console.WriteLine("Whats Your Name : ");
+            var name = Console.ReadLine();
+
+            Console.WriteLine($"Reversed Name : { Function.ReverseName(name) }");
+        }
+
+        private void _FileAndFileInfo()
+        {
+
+            //Operating system Does a lot of security checking with File() Class
+            var path = @"D:\test.txt";
+
+            File.Delete(path);
+            File.Copy(@"D:\Logs\test.txt", path, true);
+
+            if (File.Exists(path))
+            {
+                Console.WriteLine("File Is Exist");
+            }
+
+            Console.WriteLine(File.ReadAllText(path));
+
+
+            // Operating System not much doing the security cheking with FileInfo() Object
+            var fileinfo = new FileInfo(path);
+
+            if (!Directory.Exists(@"D:\pathTest"))
+            {
+                Directory.CreateDirectory(@"D:\pathTest");
+            }
+
+            fileinfo.CopyTo(@"D:\pathTest\test.txt");
+        }
+
+        private void _DirectoryAndDirectoryInfo()
+        {
+            //same as File() and FileInfo(), but this if for folder(Directory) :D
+            Directory.CreateDirectory(@"D:\CreateDir");
+            var files = Directory.GetFiles(@"D:\Nanda\Test\angular", "*.jpg*", SearchOption.AllDirectories);
+
+            foreach (var file in files)
+            {
+                Console.WriteLine(file);
+            }
+
+            var directories = Directory.GetDirectories(@"D:\Nanda\Test\angular", "*.*", SearchOption.AllDirectories);
+
+            foreach (var directory in directories)
+            {
+                Console.WriteLine(directory);
+            }
+
+
+            DirectoryInfo directoryInfo = new DirectoryInfo("../path");
+
+            directoryInfo.GetFiles();
+            directoryInfo.GetDirectories();
         }
     }  
 }
