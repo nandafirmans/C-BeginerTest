@@ -28,10 +28,12 @@ namespace ConsoleApplication
             //program._StringBuilder();
             //program._ProceduralPrograming();
             //program._FileAndFileInfo();
-            program._DirectoryAndDirectoryInfo();
+            //program._DirectoryAndDirectoryInfo();
+            program._Path();
 
             Console.ReadLine();
         }
+        #region collapse
 
         private void _Class()
         {
@@ -394,6 +396,25 @@ namespace ConsoleApplication
 
             directoryInfo.GetFiles();
             directoryInfo.GetDirectories();
+        }
+
+        #endregion
+
+        private void _Path()
+        {
+            var path1 = @"C:\Users\nanda\Downloads\main.png";
+
+            var dotIndex = path1.IndexOf('.');
+            var extension = path1.Substring(dotIndex); //get the extension using string static method 
+
+            Console.WriteLine(extension);
+
+
+            //Using System.IO.Path
+            Console.WriteLine($"Extetension : {Path.GetExtension(path1)}");
+            Console.WriteLine($"FileName : {Path.GetFileName(path1)}");
+            Console.WriteLine($"FileName without extension: {Path.GetFileNameWithoutExtension(path1)}");
+            Console.WriteLine($"Directory Name: {Path.GetDirectoryName(path1)}");
         }
     }  
 }
