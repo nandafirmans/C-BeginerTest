@@ -1,5 +1,5 @@
-﻿using ConsoleApplication.Enumerator;
-using ConsoleApplication.Math;
+﻿using ConsoleApplication.Class;
+using ConsoleApplication.Enumerator;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +13,7 @@ namespace ConsoleApplication
         {
             var program = new Program();
 
+            #region collapse 
             //program._Class();
             //program._ArrayBasic();
             //program._String();
@@ -29,10 +30,16 @@ namespace ConsoleApplication
             //program._ProceduralPrograming();
             //program._FileAndFileInfo();
             //program._DirectoryAndDirectoryInfo();
-            program._Path();
+            //program._Path();
+            #endregion
+
+            //program._ClassIntermediate();
+            //program._ClassConstructor();
+            //program._Method();
 
             Console.ReadLine();
         }
+
         #region collapse
 
         private void _Class()
@@ -398,8 +405,6 @@ namespace ConsoleApplication
             directoryInfo.GetDirectories();
         }
 
-        #endregion
-
         private void _Path()
         {
             var path1 = @"C:\Users\nanda\Downloads\main.png";
@@ -416,5 +421,74 @@ namespace ConsoleApplication
             Console.WriteLine($"FileName without extension: {Path.GetFileNameWithoutExtension(path1)}");
             Console.WriteLine($"Directory Name: {Path.GetDirectoryName(path1)}");
         }
-    }  
+
+        #endregion
+
+        private void _ClassIntermediate()
+        {
+            var person = new Person();
+            person.Name = "John"; // using object to call a method
+            person.Introduce("Nanda");
+
+            var p = Person.Parse("Jancok"); // using static method, Parse method is returning a Person() Object, I dont have to create an object first
+            p.Introduce("Nanda");
+
+        }
+
+        private void _ClassConstructor()
+        {
+            var customer = new Contact("John", 1);
+            Console.WriteLine($"id = {customer.Id} name = {customer.Name}");
+        }
+
+        private void _Method()
+        {
+            try
+            {
+                var point = new Point(10, 20);
+                point.Move(new Point(200, 100));
+                point.Move(13, 16);
+
+                Console.WriteLine($" x = { point.X } y = { point.Y }");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("an unexpected error is occured");
+            }
+
+
+            Console.WriteLine("-------------------------------------------------");
+
+            var calculator = new Calculator();
+
+            /* actually the Add() method accepted the Array of an Integer, 
+            but I dont have to pass something like this( new int[]{1,2,3,4} ), 
+            because on the Add() method I've been already using "params" to calling this method more simple */
+            var add1 = calculator.Add(1, 2, 3, 4, 5);
+            var add2 = calculator.Add(new int[] {1, 2, 3, 4, 5, 6}); // <== but if you wanna calling like this its Okay
+
+            Console.WriteLine($"result of add(params int[] numbers = { add1 } and { add2 })");
+
+            Console.WriteLine("-------------------------------------------------");
+
+            try
+            {
+                var num = int.Parse("qwerty");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Convertion Failed");
+            }
+
+            int number = 0;
+
+            /* mosh told me to not use "out" modifier, because its little bit weird ._. 
+            but some of the dotnet framework using "out" modifier, so maybe sometime I might use it */
+            var tryParse = int.TryParse("qwerty", out number); 
+
+            var result = tryParse ? number.ToString() : "conversion failed";
+
+            Console.WriteLine(result);
+        }
+    }
 }
