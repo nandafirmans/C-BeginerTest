@@ -36,6 +36,9 @@ namespace ConsoleApplication
             //program._ClassIntermediate();
             //program._ClassConstructor();
             //program._Method();
+            //program._AccessModifiers();
+
+            program._Properties();
 
             Console.ReadLine();
         }
@@ -489,6 +492,37 @@ namespace ConsoleApplication
             var result = tryParse ? number.ToString() : "conversion failed";
 
             Console.WriteLine(result);
+        }
+
+        private void _AccessModifiers()
+        {
+            var person = new Person();
+
+            /* using getter and setter method,
+            for get and set the Private method _birthDateTime on the Person() Class, 
+            this is the part of encapsulaton ( object oriented programing ).
+
+            Why ??? 
+            Because Object is about behaviour, about what they do, 
+            they Fields is primarly their internal,
+            and their implementation details witch should be hidden from the outside world, 
+            so the other class/object should not knowing about they fields */
+
+            person.SetBirthDateTime("01 03 1995");
+            var getBirth = person.GetBirthDateTime();
+
+            Console.WriteLine($"birth = { getBirth }");
+        }
+
+        private void _Properties()
+        {
+
+            // next dont forget to rewatch property episode. and explain about it with command... (bool sleepMode = true)
+            var person = new Person();
+            person.BirthDate = new DateTime(1995, 03, 06);
+            int ages = person.AgeProperty;
+
+            Console.WriteLine($"person Ages { ages }");
         }
     }
 }

@@ -6,6 +6,7 @@ namespace ConsoleApplication
 {
     public class Function
     {
+
         public static string Shipment(string str)
         {
             switch (str) 
