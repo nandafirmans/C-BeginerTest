@@ -1,4 +1,6 @@
 ﻿using ConsoleApplication.Class;
+using ConsoleApplication.Class.Composition;
+using ConsoleApplication.Class.Inheritance;
 using ConsoleApplication.Enumerator;
 using System;
 using System.Collections.Generic;
@@ -37,8 +39,11 @@ namespace ConsoleApplication
             //program._ClassConstructor();
             //program._Method();
             //program._AccessModifiers();
+            //program._Properties();
+            //program._Indexer();
+            //program._Inheritance();
 
-            program._Properties();
+            program._Composition();
 
             Console.ReadLine();
         }
@@ -429,6 +434,12 @@ namespace ConsoleApplication
 
         private void _ClassIntermediate()
         {
+            /*
+             CLASSES :
+             * Classes are building blocks of software applications. 
+             * A class encapsulates data (stored in ﬁelds) and behaviour (deﬁned by methods)
+             * An object is an instance of a class. We can create an object using the new operator. */
+
             var person = new Person();
             person.Name = "John"; // using object to call a method
             person.Introduce("Nanda");
@@ -440,6 +451,14 @@ namespace ConsoleApplication
 
         private void _ClassConstructor()
         {
+            /*
+             Constructors : 
+                * A constructor is a method that is called when an instance of a class is created. 
+                * We use constructors to put an object in an early state.
+                * As a best practice, deﬁne a constructor only when an object “needs” to be initialised or it won’t be able to do its job. 
+                * Constructors do not have a return type, not even void, and they should have the exact same name as the class.
+             */
+
             var customer = new Contact("John", 1);
             Console.WriteLine($"id = {customer.Id} name = {customer.Name}");
         }
@@ -517,12 +536,94 @@ namespace ConsoleApplication
         private void _Properties()
         {
 
-            // next dont forget to rewatch property episode. and explain about it with command... (bool sleepMode = true)
+            /*              Property :               * A property is a kind of class member that is used for providing access to ﬁelds of a class.              * As a best practice, we must declare ﬁelds as private and create public properties to provide access to them.              * A property encapsulates a get and a set method               * Inside the get/set methods we can have some logic.              * If you don’t need to write any speciﬁc logic in the get or set method,                 it’s more efﬁcient to create an auto-implemented property.                 An auto-implemented property encapsulates a private ﬁeld behind the scene.                 So you don’t need to manually create one. The compiler creates one for you             */
+
             var person = new Person();
-            person.BirthDate = new DateTime(1995, 03, 06);
-            int ages = person.AgeProperty;
+            person.BirthDate = new DateTime(1995, 03, 06); // set the birthdate;
+            int ages = person.AgeProperty; // the ageProperty will return an int (calculate the current year with the BirthDate) 
 
             Console.WriteLine($"person Ages { ages }");
         }
+
+        private void _Indexer()
+        {
+            /*
+             Indexers :
+             * Indexer is a special kind of property that allows accessing elements of a list by an index. 
+             * If a class has the semantics of a list, or collection, we can deﬁne an indexer property for it. 
+               This way it’s easier to get or set items in the collection. */
+
+            var cookie = new HttpCookie();
+
+            cookie["name"] = "Nanda";
+            Console.WriteLine(cookie["name"]);
+        }
+
+
+        //Class Coupling =============================================================================================== 
+
+            /* 
+            Class Coupling 
+                * A measure of how interconnected classes and subsystems are. 
+                * The more coupled classes, the harder it is to change them. 
+                * A change in one class may affect many other classes. 
+                * Loosely coupled software, as opposed to tightly coupled software, is easier to change. 
+                * Two types of relationships between classes: "Inheritance" and "Composition" 
+
+            Favour Composition over Inheritance :
+             
+                * Problems with inheritance: 
+                    • Easily abused by amateur designers / developers 
+                    • Leads to large complex hierarchies 
+                    • Such hierarchies are very fragile and a change may affect many classes 
+                    • Results in tight coupling 
+
+                * Beneﬁts of composition: 
+                    • Flexible 
+                    • Leads to loose coupling 
+
+                * Having said all that, it doesn’t mean inheritance should be avoided at all times. 
+                    In fact, it’s great to use inheritance when dealing with very stable classes on top of small hierarchies. 
+                    As the hierarchy grows (or variations of classes increase), the hierarchy, however, becomes fragile. 
+                    And that’s where composition can give you a better design (Mosh Hamedani)
+            */
+
+            private void _Inheritance()
+            {
+                /*
+                    Inheritance :
+                    * A kind of relationship between two classes that allows one to inherit code from the other. 
+                    * Referred to as Is-A relationship: A Car is a Vehicle 
+                    * Beneﬁts: code re-use and polymorphic behaviour. 
+                */
+
+                // so the "text object" is have the Copy() method, which the originally Copy() method is in the "Presentation Class"
+                // because the "Text class" inherited "Presentation Class" so the "text object" can have all their method and properties
+
+                var text = new Text();
+        
+                text.Width = 200;
+                text.Copy();
+            }
+
+            private void _Composition()
+            {
+                /*
+                    Composition :
+                    * A kind of relationship that allows one class to contain another.
+                */
+
+                // We re-use the code in the logger class without 
+                // the need to repeat that logic in DbMigrator and Installer
+
+                var logger = new Logger();
+                var installer = new Installer(logger);
+                var dbMigrator = new DbMigrator(logger);
+        
+                installer.Installing();
+                dbMigrator.Migrating();
+            }
+
+        //  End Class Coupling ============================================================================================
     }
 }

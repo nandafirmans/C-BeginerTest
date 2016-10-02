@@ -21,15 +21,15 @@ namespace ConsoleApplication
             > open console using "Shift + Click"
             > on the console type = "ildasm nameOfProject.exe" 
             > it will open a IL DASM (Intermediate Language Disassembler) window 
-            > open theclass and you will see the compiler create method and fields for BirthDay Property*/
+            > open the class and you will see the compiler create method and fields for BirthDate Property (getter and setter method)*/
         public DateTime BirthDate { get; set; }
 
         public int AgeProperty
         {
             get
             {
-                var timeSpan = DateTime.Today - BirthDate;
-                var years = timeSpan.Days/365;
+                var timeSpan = DateTime.Today - BirthDate; //get the current date decrease it by the birhdate, it will create a timeSpan object
+                var years = timeSpan.Days/365; // the timespan object divided by 1 year
 
                 return years;
             } 
