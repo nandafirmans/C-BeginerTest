@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ConsoleApplication
+namespace ConsoleApplication.Class
 {
     public class Function
     {

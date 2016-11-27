@@ -1,11 +1,20 @@
 ﻿using ConsoleApplication.Class;
 using ConsoleApplication.Class.Composition;
+using ConsoleApplication.Class.ConstructorAndInheritance;
 using ConsoleApplication.Class.Inheritance;
+using ConsoleApplication.Class.UpCastingDownCasting;
+using ConsoleApplication.Class.InterfaceExtensibility;
+using ConsoleApplication.Class.Generics;
 using ConsoleApplication.Enumerator;
+using ConsoleApplication.Class.Delegates;
+using ConsoleApplication.Class.ExtensionMethod;
+using ConsoleApplication.Class.LINQ;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Linq;
 
 namespace ConsoleApplication
 {
@@ -42,8 +51,18 @@ namespace ConsoleApplication
             //program._Properties();
             //program._Indexer();
             //program._Inheritance();
+            //program._Composition();
+            //program._ConstructorAndInheritance();
+            //program.UpCastingDownCasting();
+            //program.InterfaceExtensibility();
+            //program.Generics();
+            //program.Delegates();
+            //program.LambdaExpression();
+            //program.ExtensionMethod();
+            //program.LINQ();
+            //program.NullableType();
 
-            program._Composition();
+
 
             Console.ReadLine();
         }
@@ -536,7 +555,17 @@ namespace ConsoleApplication
         private void _Properties()
         {
 
-            /*              Property :               * A property is a kind of class member that is used for providing access to ﬁelds of a class.              * As a best practice, we must declare ﬁelds as private and create public properties to provide access to them.              * A property encapsulates a get and a set method               * Inside the get/set methods we can have some logic.              * If you don’t need to write any speciﬁc logic in the get or set method,                 it’s more efﬁcient to create an auto-implemented property.                 An auto-implemented property encapsulates a private ﬁeld behind the scene.                 So you don’t need to manually create one. The compiler creates one for you             */
+            /*
+             Property : 
+             * A property is a kind of class member that is used for providing access to ﬁelds of a class.
+             * As a best practice, we must declare ﬁelds as private and create public properties to provide access to them.
+             * A property encapsulates a get and a set method 
+             * Inside the get/set methods we can have some logic.
+             * If you don’t need to write any speciﬁc logic in the get or set method, 
+               it’s more efﬁcient to create an auto-implemented property. 
+               An auto-implemented property encapsulates a private ﬁeld behind the scene. 
+               So you don’t need to manually create one. The compiler creates one for you
+            */
 
             var person = new Person();
             person.BirthDate = new DateTime(1995, 03, 06); // set the birthdate;
@@ -559,36 +588,36 @@ namespace ConsoleApplication
             Console.WriteLine(cookie["name"]);
         }
 
-
         //Class Coupling =============================================================================================== 
+        #region Class Coupling
 
-            /* 
-            Class Coupling 
-                * A measure of how interconnected classes and subsystems are. 
-                * The more coupled classes, the harder it is to change them. 
-                * A change in one class may affect many other classes. 
-                * Loosely coupled software, as opposed to tightly coupled software, is easier to change. 
-                * Two types of relationships between classes: "Inheritance" and "Composition" 
+        /* 
+        Class Coupling 
+            * A measure of how interconnected classes and subsystems are. 
+            * The more coupled classes, the harder it is to change them. 
+            * A change in one class may affect many other classes. 
+            * Loosely coupled software, as opposed to tightly coupled software, is easier to change. 
+            * Two types of relationships between classes: "Inheritance" and "Composition" 
 
-            Favour Composition over Inheritance :
-             
-                * Problems with inheritance: 
-                    • Easily abused by amateur designers / developers 
-                    • Leads to large complex hierarchies 
-                    • Such hierarchies are very fragile and a change may affect many classes 
-                    • Results in tight coupling 
+        Favour Composition over Inheritance :
 
-                * Beneﬁts of composition: 
-                    • Flexible 
-                    • Leads to loose coupling 
+            * Problems with inheritance: 
+                • Easily abused by amateur designers / developers 
+                • Leads to large complex hierarchies 
+                • Such hierarchies are very fragile and a change may affect many classes 
+                • Results in tight coupling 
 
-                * Having said all that, it doesn’t mean inheritance should be avoided at all times. 
-                    In fact, it’s great to use inheritance when dealing with very stable classes on top of small hierarchies. 
-                    As the hierarchy grows (or variations of classes increase), the hierarchy, however, becomes fragile. 
-                    And that’s where composition can give you a better design (Mosh Hamedani)
-            */
+            * Beneﬁts of composition: 
+                • Flexible 
+                • Leads to loose coupling 
 
-            private void _Inheritance()
+            * Having said all that, it doesn’t mean inheritance should be avoided at all times. 
+                In fact, it’s great to use inheritance when dealing with very stable classes on top of small hierarchies. 
+                As the hierarchy grows (or variations of classes increase), the hierarchy, however, becomes fragile. 
+                And that’s where composition can give you a better design (Mosh Hamedani)
+        */
+
+        private void _Inheritance()
             {
                 /*
                     Inheritance :
@@ -623,7 +652,193 @@ namespace ConsoleApplication
                 installer.Installing();
                 dbMigrator.Migrating();
             }
+        #endregion
+        //End Class Coupling ===========================================================================================
 
-        //  End Class Coupling ============================================================================================
+        private void _ConstructorAndInheritance()
+        {
+
+            /*
+             Constructors and Inheritance :
+                 * Constructors are not inherited and need to explicitly deﬁned in derived class. 
+                 * When creating an object of a type that is part of an inheritance hierarchy, base class constructors are always executed ﬁrst. 
+                 * We can use the base keyword to pass control to a base class constructor. 
+             */
+
+            var car = new Car("asdasd123");
+        }
+
+        private void UpCastingDownCasting()
+        {
+            /*
+                 * Upcasting: conversion from a derived class to a base class 
+                 * Downcasting: conversion from a base class to a derived class 
+                 * All objects can be implicitly converted to a base class reference
+             */
+
+            Text2 text = new Text2();
+            //Shape2 shape = new Shape2();
+
+            Shape2 shape = text; // UpCasting the shape object cannot access property on the text class
+            Shape2 shapee = (Text2) shape; // Downcasting the shape object can access property on the text class
+
+            Console.WriteLine($"{ text.Width } + { shape.Width }");
+
+        }
+
+
+        private void InterfaceExtensibility()
+        {
+            /* INTERFACES : 
+                *  An interface is a language construct that is similar to a class (in terms of syntax) but is fundamentally different. 
+                *  An interface is simply a declaration of the capabilities (or services) that a class should provide.
+                *  So an interface is purely a declaration. Members of an interface do not have implementation. 
+                *  An interface can only declare methods and properties, but not ﬁelds (because ﬁelds are about implementation detail). 
+                *  Members of an interface do not have access modiﬁers. 
+                *  Interfaces help building loosely coupled applications. 
+                   We reduce the coupling between two classes by putting an interface between them. 
+                   This way, if one of these classes changes, 
+                   it will have no impact on the class that is dependent on that (as long as the interface is kept the same).
+                *  We can use interfaces to change our application’s behaviour by “extending” its code (rather than changing the existing code).
+                *  
+             */
+
+
+            // in the constructor we passing the real class that implement the interfaces for doing the real logic
+            // noted that interfaces doesn't do the real logic, that just make an application loosely tight, which is very powerfull 
+            var DbMigrator = new DBMigrator(new ConsoleLogger());
+            DbMigrator.Migrate();
+
+            var DbMigrator2 = new DBMigrator(new FileLogger("C:\\Test\\Log.txt"));
+            DbMigrator2.Migrate();
+        }
+
+        private void Generics()
+        {
+            /*
+                Generics introduce to the .NET Framework the concept of type parameters, 
+                which make it possible to design classes and methods that defer- 
+                the specification of one or more types until the class or method is declared and instantiated by client code.
+             */
+
+            var cow = new AnimalGenerics<Cow>(); // Fill the generics with the real class
+
+            var number = new NullableGenerics<int>(33); // Fill the generics with the real value in case should using value type (struct) not refrence type (class)
+
+            Console.WriteLine("Has value ? " + number.HasValue); 
+            Console.WriteLine("Value : " + number.GetValueOrDefault());
+        }
+
+        private void Delegates()
+        {
+            /*
+             * DELEGATES :
+                * is object that know how to call a method (or group of method)
+                * is refrence to a function (or pointer to a function) 
+             */
+            var photoProcessor = new PhotoProcessor();
+            var filter = new FilterHandler();
+
+            PhotoProcessor.PhotoFilterHandler delegatedFilter = filter.ApplyContrast;
+            delegatedFilter += filter.ApplyBrightness;
+            delegatedFilter += filter.Resize;
+
+            photoProcessor.Process("images.jpg", delegatedFilter);
+        }
+
+        private void LambdaExpression()
+        {
+            /*
+                LAMBDA EXPRESSION : is Anonymous method (no access modifier, no name, no return statement)
+            */
+
+            Func<int, int> multiplier = number => number * number;
+
+            Console.WriteLine(multiplier(6));
+        }
+
+        private void ExtensionMethod()
+        {
+            /*
+                EXTENSION METHODS : 
+                    * Allow us to change an existing class without : 
+                        * change its source codes or creating another class that inherit from it
+            */
+
+            string post = "This is supposed to be a very long post blog blah blah blah...";
+            string shorterPost = post.Shorter(5); // Shorter was a extension method of string
+
+            Console.WriteLine(shorterPost);
+        }
+
+        private void LINQ()
+        {
+            /*
+                LINQ ( LANGUAGE INTEGRATED QUERY ) :
+                    * Gives you the capabillity to query an objects
+
+            */
+
+            var books = new BookRepository().GetBook();
+
+            // LINQ example
+            var cheapBooks = books
+                                .Where(b => b.Price < 9000)
+                                .OrderBy(b => b.Price);
+
+            // another way to use LINQ
+            var anotherCheapBooks = 
+                from b in books
+                where b.Price < 9000
+                orderby b.Price
+                select b;
+
+            // notes!! actualy if you using "anotherCheapBooks" way.. behind the scene its gonna converted to "cheapBooks" way
+
+            foreach (var b in anotherCheapBooks)
+            {
+                Console.WriteLine($"title :  { b.Title }");
+                Console.WriteLine($"price : { b.Price }");
+            }
+
+            // HERE USEFULL LINQ METHODS:
+
+                //books.Where();            // to return a filter list of book that match given condition
+                //books.Single();           // to return a single book that match given condition will throw an error if condition false
+                //books.SingleOrDefault();  // same like single but if the condition false is gonna return null instead throw an error
+
+                //books.First();
+                //books.FirstOrDefault();
+                //books.Last();
+                //books.LastOrDefault();
+
+                //AGREGATE FUNCTION :  
+
+                //books.Min(); 
+                //books.Max();
+                //books.Count();
+                //books.Average();
+
+                //books.Skip(2).Take(3);
+
+
+        }
+
+        private void NullableType()
+        {
+            /*
+                NULLABLE TYPES : 
+                    * is Value Types that have abillity to null;
+            */
+
+            //DateTime dateError = null;
+
+            DateTime? date = null; //not Error
+
+            Console.WriteLine(date.GetValueOrDefault()); //will return null;
+            Console.WriteLine(date.HasValue); //will return boolean;
+            //Console.WriteLine(date.Value); //will throw an error;
+            
+        }
     }
 }
